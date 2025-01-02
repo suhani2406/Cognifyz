@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafe in Navi Mumbai</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #fefaf6;
+            color: #3c2a21;
+        }
+        header {
+            background: linear-gradient(135deg, #ff9a8b, #fecfef);
+            background-image: url("https://th.bing.com/th/id/OIP.LE3kZurEiyhUv8Fr5iiS0gHaEJ?w=626&h=351&rs=1&pid=ImgDetMain");
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 3rem;
+            text-shadow: 2px 2px #3c2a21;
+        }
+        header p {
+            font-style: italic;
+            margin: 5px 0;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: navajowhite;
+            padding: 15px;
+            border-bottom: 3px solid #ff9a8b;
+        }
+        nav button {
+            background-color: #3c2a21;
+            color: white;
+            padding: 10px 25px;
+            margin: 0 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        nav button:hover {
+            background-color: pink;
+            transform: scale(1.1);
+        }
+       
+
+
+        .content {
+            display: none;
+            padding: 30px;
+            text-align: center;
+        }
+        .content.active {
+            display: block;
+            background-image: url("https://i.pinimg.com/736x/74/6a/eb/746aeb1b89e7e3708993f14504b4e2e1.jpg");
+        }
+        .coffee-list, .menu-list, .services {
+            display: flex;
+            justify-content: center;
+            flex-wrap: nowrap;
+            gap: 30px;
+            margin-top: 30px;
+            overflow-x: auto;
+        }
+        .coffee-item, .menu-item, .service-box {
+            background: white;
+            border: 2px solid #ffd1dc;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            min-width: 250px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .coffee-item:hover, .menu-item:hover, .service-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        .coffee-item img, .menu-item img {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            height: 250px;
+        }
+        .coffee-item h3, .menu-item h3, .service-box h3 {
+            margin: 10px 0;
+            font-size: 1.5rem;
+            color: #3c2a21;
+        }
+        .coffee-item p, .menu-item p, .service-box p {
+            font-size: 1rem;
+            color: #6b4e37;
+        }
+        .scrolling-text {
+            margin-top: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3c2a21;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+        .scrolling-text span {
+            display: inline-block;
+            position: absolute;
+            animation: scroll-text 10s linear infinite;
+        }
+        @keyframes scroll-text {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+
+        .additional-section {
+            margin-top: 30px;
+            padding: 20px; 
+            background-image: url("https://w0.peakpx.com/wallpaper/105/442/HD-wallpaper-page-4-and-customizable-cute-templates-cute-beige.jpgs");
+            text-align: center;
+            /* border-top: 3px solid #ffd1dc; */
+        }
+        .additional-section h2 {
+            font-size: 2rem;
+            color: blanchedalmond;
+        }
+        /* .menu-list, .services {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .menu-item, .service-item {
+            max-width: 300px;
+            background-image: url("https://cdn.wallpapersafari.com/72/30/dLiOyR.jpg");
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .menu-item:hover, .service-item:hover {
+            transform: translateY(-5px);
+        }
+        .menu-item h3, .service-item h3 {
+            font-size: 1.5rem;
+            margin: 10px 0;
+        }
+        .menu-item p, .service-item p {
+            font-size: 1rem;
+            color: #6b4e37;
+        } */
+
+
+        .services-heading h2 {
+    text-align: center;
+    font-size: 2rem;
+    /* margin-bottom: 10px; */
+    color: #3c2a21;
+    font-weight: bold;
+}
+        .menu-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* margin-top: 50px; */
+            width: 50%;
+            border-radius: 15px;
+        }
+.menu-list{
+    width: 100%;
+    height: 50%;
+    border-radius: 15px;
+}
+
+
+        .menu-section .menu-category {
+            display: none;
+            width: 100%;
+            animation: slide-in 1s ease-in-out;
+            border-radius: 15px;
+        }
+        .menu-section .menu-category.active {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        @keyframes slide-in {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        .services {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            padding: 20px;
+            background: url("https://th.bing.com/th/id/OIP.oBeBhIRYhmlEYkS-lj_8DQHaHa?rs=1&pid=ImgDetMain") center/cover no-repeat;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-box {
+            flex: 1;
+            max-width: 300px;
+            background-image: url("https://image.freepik.com/vector-gratis/fondo-cafe-retro-grabado-granos-cafe-bolsa-yute-cerezas-cafe-hojas_281653-2011.jpg");
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .service-box h3 {
+            font-size: 1.8rem;
+            /* margin-bottom: 10px; */
+            color: #3c2a21;
+        }
+
+        .service-box p {
+            font-size: 1rem;
+            color: #6b4e37;
+        }
+
+
+        footer {
+            background-color: #3c2a21;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            /* margin-top: 30px; */
+        }
+        footer .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        footer .footer-content div {
+            margin: 10px;
+        }
+        footer a {
+            color: #ffd1dc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        footer a:hover {
+            color: #ff9a8b;
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Cozy Corner Coffehouse</h1>
+        <p>A cozy corner to sip, savor, and unwind</p>
+    </header>
+   
+    <nav>
+        <button onclick="showContent('best-sellers')">Best Selling Coffees</button>
+        <button onclick="showContent('menu')">Explore Our Menu</button>
+
+    </nav>
+    <div id="best-sellers" class="content">
+        <h2>Our Best Selling Coffees</h2>
+        <div class="coffee-list">
+            <div class="coffee-item">
+                <img src="https://th.bing.com/th/id/R.70b814c4d17c7a58f36ba1f51aa35895?rik=II4F%2fZnwlUdVtA&riu=http%3a%2f%2fwww.2cupsofjoe.com%2fwp-content%2fuploads%2f2015%2f01%2fEspresso_La_Cimbali_1.jpg&ehk=qGbS3IuPta%2bE2n6YxcjtG8pi3XzPfi8d0CAehobZ3gA%3d&risl=1&pid=ImgRaw&r=0" alt="Espresso">
+                <h3>Espresso</h3>
+                <p><b>Rich and bold, the classic choice for coffee lovers.</b></p>
+            </div>
+            <div class="coffee-item">
+                <img src="https://th.bing.com/th/id/OIP.cyCmZYVSNiUbvseIz7hKggHaFj?rs=1&pid=ImgDetMain" alt="Cappuccino">
+                <h3>Cappuccino</h3>
+                <p><b>Perfect balance of espresso, steamed milk, and foam.</b></p>
+            </div>
+            <div class="coffee-item">
+                <img src="https://th.bing.com/th/id/OIP.yCjUf-MPAzj4_ZaMiraYvAHaE7?rs=1&pid=ImgDetMain" alt="Latte">
+                <h3>Latte</h3>
+                <p><b>Creamy and smooth with a hint of espresso.</b></p>
+            </div>
+        </div>
+
+        <div class="scrolling-text">
+            <span>Every moment has its flavour</span>
+        </div>
+    </div>
+    <div id="menu" class="content">
+        <h2>Explore Our Menu</h2>
+        <div class="menu-list">
+            <div class="menu-item">
+                <img src="https://th.bing.com/th/id/OIP.N-KkK1_qnGc4JY4HPeRyQwHaE8?rs=1&pid=ImgDetMain" alt="Snacks">
+                <h3>Snacks</h3>
+                <p><b>Delicious croissants,Donuts,Breakfast Pizza,Cupcakes, sandwiches, and pastries to pair with your coffee.</b></p>
+            </div>
+            <div class="menu-item">
+                <img src="https://images-na.ssl-images-amazon.com/images/I/91PvnGs-fRL._AC_SS350_.jpg" alt="Beverages">
+                <h3>Beverages</h3>
+                <p><b>Wide variety of teas, smoothies, and refreshing coolers.</b></p>
+            </div>
+            <div class="menu-item">
+                <img src="https://th.bing.com/th/id/OIP.0-e8VA4rJl3riia_8oLNMAHaHa?rs=1&pid=ImgDetMain" alt="Combos">
+                <h3>Special Combos</h3>
+                <p><b>Enjoy our best-seller combos with great discounts.</b></p>
+            </div>
+        </div>
+        </div>
+        <div class="services-heading">
+            <h2>Services We Offer</h2>
+        </div>
+        <div class="services">
+            <div class="service-box">
+                <h3>Cozy Ambience</h3>
+                <p>Relax in our beautifully decorated cafe, perfect for meetings and hangouts.</p>
+            </div>
+            <div class="service-box">
+                <h3>Free Wi-Fi</h3>
+                <p>Stay connected with our high-speed internet while you enjoy your coffee.</p>
+            </div>
+            <div class="service-box">
+                <h3>Events & Bookings</h3>
+                <p>Plan your small gatherings or celebrations at our cafe with customized menus.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h3>Contact Us</h3>
+                <p>Phone: +91 98765 43210</p>
+                <p>Email: contact@navimumbaicafe.com</p>
+            </div>
+            <div>
+                <h3>Follow Us</h3>
+                <a href="#">Facebook</a> | <a href="#">Instagram</a> | <a href="#">Twitter</a>
+            </div>
+            <div>
+                <h3>Visit Us</h3>
+                <p>123 Cafe Lane, Navi Mumbai, Maharashtra</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function showContent(id) {
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(id).classList.add('active');
+        }
+        if (id === 'menu') {
+                const categories = document.querySelectorAll('.menu-category');
+                categories.forEach((category, index) => {
+                    setTimeout(() => {
+                        category.classList.add('active');
+                    }, index * 500);
+                });
+            }
+
+
+    </script>
+</body>
+</html>
